@@ -13,6 +13,7 @@
 # Implementation by Ben Alkov December 2016
 import math
 
+# Not strictly necessary, but seeing naked e.g. `document`, `window`, etc. really bothers me
 import js
 
 from pyodide import create_proxy
@@ -225,6 +226,7 @@ def init():
         30,  # Near clip
         34  # Far clip
     )
+    # Camera Z-up
     CAMERA.up.set(0, 0, 1)
     dk_blue = Color.new(0x111550)
     RENDERER = utils.rendererConfig(WebGLRenderer, WIDTH, HEIGHT, dk_blue)
@@ -236,6 +238,7 @@ def setup():
     num_cubes = 100
 
     amber = Color.new(0xb3a297)
+
     CAMERA.setFocalLength = 70
     CAMERA.position.x = 0
     CAMERA.position.y = 0
