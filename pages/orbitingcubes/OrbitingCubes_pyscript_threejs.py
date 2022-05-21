@@ -18,7 +18,7 @@ import js
 from pyodide import create_proxy
 
 from three import (
-    BoxGeometry,
+    BoxBufferGeometry,
     Color,
     DirectionalLight,
     EdgesGeometry,
@@ -77,8 +77,7 @@ class Cube():
                                                   Cube.ORBIT_SPEED_TOLERANCE)
         self._objectAngularSpeed = utils.avoidZero(Cube.SELF_ROT_SPEED_LIMIT,
                                                    Cube.SELF_ROT_TOLERANCE)
-        self._cubeGeometry = BoxGeometry.new(self._size, self._size, self._size)
-        # Or WireframeGeometry(geo) to render all edges.
+        self._cubeGeometry = BoxBufferGeometry.new(self._size, self._size, self._size)
         self._outlineGeometry = EdgesGeometry.new(self._cubeGeometry)
         self._cubeMaterial = MeshLambertMaterial.new(
             transparent=True,
