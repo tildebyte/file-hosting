@@ -162,15 +162,11 @@ class Cube():
             color = blue.clone()
             otherColor = green.clone()
 
-        self._cubeMaterial.color = color
-        # This looks weird because, AFAICT, lerping with a var of type `Color`
-        #     **overwrites** the var with the new `Color` value (as well as
-        #     changing the color being lerped, as expected). I'm working around
-        #     this by always creating entirely new `Color` vars each time. Which
-        #     is probably overkill.
-        self._cubeMaterial.color.lerp(Color.new(otherColor),
+        self._cubeMaterial.color = color.clone()
+        self._cubeMaterial.color.lerp(otherColor.clone(),
+                                      # avoid obvious color bands
                                       shade + utils.randFloat(-0.02, 0.02))
-        self._outlineMaterial.color = self._cubeMaterial.color
+        self._outlineMaterial.color = self._cubeMaterial.color.clone()
         # Outline color is 50% more saturated, 15% darker than cube color
         self._outlineMaterial.color.offsetHSL(0.0, 0.50, -0.15)
 
