@@ -11,6 +11,7 @@
 #
 # Updated implemention, using pyscript and three.js by Ben Alkov May 2022
 # Implementation by Ben Alkov December 2016
+
 import math
 
 # Not strictly necessary, but seeing naked e.g. `document`, `window`, etc. really bothers me
@@ -68,6 +69,7 @@ class Cube():
 
     # Pythagoras in 3D
     _cube_max_extent = math.sqrt(3) * CUBE_MAX_SIZE
+
     # First orbit is a little larger than the diagonal extent of the largest cube
     _first_orbit = _cube_max_extent + (CUBE_MAX_SIZE * 0.5)
     ORBITS = (_first_orbit, _first_orbit * 2,
@@ -87,6 +89,7 @@ class Cube():
         self._cubeMaterial = MeshLambertMaterial.new(
             transparent=True,
             side=DoubleSide,
+
             # More transparent *away from* the origin
             opacity=utils.mapLinear(self._radius * 0.8,
                                     Cube.ORBITS[0],  Cube.ORBITS[3], 1.0, 0.1)
@@ -94,6 +97,7 @@ class Cube():
         self._outlineMaterial = LineBasicMaterial.new(
             transparent=True,
             side=DoubleSide,
+
             # More transparent *toward* the origin
             opacity=utils.mapLinear(self._radius * 0.8,
                                     Cube.ORBITS[0],  Cube.ORBITS[3], 0.6, 1.0)
@@ -109,6 +113,7 @@ class Cube():
 
     def _updateAngle(self):
         position = Vector2.new(self._position.x, self._position.y)
+
         # Returns radians!
         return position.angle()
 
@@ -136,6 +141,7 @@ class Cube():
         blue = Color.new(0x2525C4)
         green = Color.new(0x7DB528)
         angle = math.degrees(self._angle)
+
         # Left half
         if (90 <= angle <= 270):
             # 2nd quad
@@ -167,6 +173,7 @@ class Cube():
                                       # avoid obvious color bands
                                       shade + utils.randFloat(-0.02, 0.02))
         self._outlineMaterial.color = self._cubeMaterial.color.clone()
+
         # Outline color is 50% more saturated, 15% darker than cube color
         self._outlineMaterial.color.offsetHSL(0.0, 0.50, -0.15)
 
@@ -189,6 +196,7 @@ class Cube():
         # this item.
         angle = utils.randFloat(0.0, math.tau)
         orbit = Cube._chooseOrbit()
+
         # Randomly offset the position on the orbit, so we don't end up with multiple
         # cubes orbiting on *exactly* the same circles.
         radius = orbit + utils.randFloat(0.0, Cube.ORBITS[0])
@@ -233,23 +241,20 @@ def setup():
 
     num_cubes = 100
 
-    amber = Color.new(0xb3a297)
-
     CAMERA.setFocalLength = 70
     CAMERA.position.x = 0
     CAMERA.position.y = 0
     CAMERA.position.z = 32
     CAMERA.lookAt(Vector3.new(0, 0, 0))
     LIGHT.intensity = 2.0
+    amber = Color.new(0xb3a297)
     AMB_LIGHT.color = amber
     AMB_LIGHT.intensity = 0.6
     SCENE.add(LIGHT)
     SCENE.add(AMB_LIGHT)
-
     cubes = [Cube() for _ in range(num_cubes)]
     for cube in cubes:
         SCENE.add(cube.getMeshObject())
-
     js.document.body.appendChild(RENDERER.domElement)
     js.window.requestAnimationFrame = utils.platformRequestAnimationFrame()
     RENDERER.render(SCENE, CAMERA)
