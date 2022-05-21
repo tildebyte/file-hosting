@@ -72,7 +72,7 @@ class Cube():
         self._size = utils.randFloat(Cube.CUBE_MIN_SIZE, Cube.CUBE_MAX_SIZE)
         self._position, self._radius = Cube._positionOnOrbit()
         self._angle = self._updateAngle()
-        self._rotation = Euler.new(0, 0, utils.randFloat(0, math.tau))
+        self._rotation = Euler.new(0.0, 0.0, utils.randFloat(0.0, math.tau))
         self._orbitAngularSpeed = utils.avoidZero(Cube.ORBIT_SPEED_LIMIT,
                                                   Cube.ORBIT_SPEED_TOLERANCE)
         self._objectAngularSpeed = utils.avoidZero(Cube.SELF_ROT_SPEED_LIMIT,
@@ -136,11 +136,11 @@ class Cube():
         if (90 <= angle <= 270):
             # 2nd quad
             if (90 <= angle <= 180):
-                shade = utils.mapLinear(angle, 180, 90, 0, 0.5)
+                shade = utils.mapLinear(angle, 180, 90, 0.0, 0.5)
 
             # 3rd quad
             elif (180 < angle <= 270):
-                shade = utils.mapLinear(angle, 180, 270, 0, 0.5)
+                shade = utils.mapLinear(angle, 180, 270, 0.0, 0.5)
 
             color = green.clone()
             otherColor = blue.clone()
@@ -149,11 +149,11 @@ class Cube():
         else:
             # 1st quad
             if (0 <= angle < 90):
-                shade = utils.mapLinear(angle, 0, 89.99, 0, 0.5)
+                shade = utils.mapLinear(angle, 0, 89.99, 0.0, 0.5)
 
             # 4th quad
             elif (270 < angle <= 360):
-                shade = utils.mapLinear(angle, 360, 269.99, 0, 0.5)
+                shade = utils.mapLinear(angle, 360, 269.99, 0.0, 0.5)
 
             color = blue.clone()
             otherColor = green.clone()
@@ -171,7 +171,7 @@ class Cube():
     def _chooseOrbit():
         # Randomly choose an orbit, based on a set of probabilities.
         # The probabilities favor larger orbits, as they have more room for more cubes.
-        chance = utils.randFloat(0, 1)
+        chance = utils.randFloat(0.0, 1.0)
         if chance < 0.16:
             orbit = Cube.ORBITS[0]
         elif chance < 0.40:
@@ -185,7 +185,7 @@ class Cube():
     def _positionOnOrbit():
         # Generate a random position on the circumference of the orbit chosen for
         # this item.
-        angle = utils.randFloat(0, math.tau)
+        angle = utils.randFloat(0.0, math.tau)
         orbit = Cube._chooseOrbit()
         # Randomly offset the position on the orbit, so we don't end up with multiple
         # cubes orbiting on *exactly* the same circles.
