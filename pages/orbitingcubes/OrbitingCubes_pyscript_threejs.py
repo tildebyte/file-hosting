@@ -18,9 +18,12 @@ import js
 from pyodide import create_proxy
 
 from three import (
+    AmbientLight,
     BoxBufferGeometry,
     Color,
+    ColorManagement,
     DirectionalLight,
+    DoubleSide,
     EdgesGeometry,
     Euler,
     LineBasicMaterial,
@@ -40,6 +43,7 @@ import utils
 WIDTH = js.window.innerWidth
 HEIGHT = js.window.innerHeight
 SCENE = None
+AMB_LIGHT = None
 LIGHT = None
 CAMERA = None
 RENDERER = None
@@ -81,14 +85,14 @@ class Cube():
         self._outlineGeometry = EdgesGeometry.new(self._cubeGeometry)
         self._cubeMaterial = MeshLambertMaterial.new(
             transparent=True,
-            # More *transparent* away from the origin
+            side=DoubleSide,
             # More transparent *away from* the origin
             opacity=utils.mapLinear(self._radius * 0.8,
                                     Cube.ORBITS[0],  Cube.ORBITS[3], 1.0, 0.1)
         )
         self._outlineMaterial = LineBasicMaterial.new(
             transparent=True,
-            # More *opaque* away from the origin
+            side=DoubleSide,
             # More transparent *toward* the origin
             opacity=utils.mapLinear(self._radius * 0.8,
                                     Cube.ORBITS[0],  Cube.ORBITS[3], 0.6, 1.0)
@@ -166,6 +170,8 @@ class Cube():
         self._cubeMaterial.color.lerp(Color.new(otherColor),
                                       shade + utils.randFloat(-0.02, 0.02))
         self._outlineMaterial.color = self._cubeMaterial.color
+        # Outline color is 50% more saturated, 15% darker than cube color
+        self._outlineMaterial.color.offsetHSL(0.0, 0.50, -0.15)
 
     def _chooseOrbit():
         # Randomly choose an orbit, based on a set of probabilities.
@@ -197,6 +203,7 @@ class Cube():
 
 def init():
     global SCENE
+    global AMB_LIGHT
     global LIGHT
     global CAMERA
     global RENDERER
@@ -204,16 +211,19 @@ def init():
     py_canvas = js.document.getElementById('py_canvas')
     py_canvas.querySelector('.loading').remove()
 
+    ColorManagement.legacyMode = False
+
     # Global Z-up
     Object3D.DefaultUp = Vector3.new(0, 0, 1)
 
     SCENE = Scene.new()
     LIGHT = DirectionalLight.new()
+    AMB_LIGHT = AmbientLight.new()
     CAMERA = PerspectiveCamera.new(
         50,  # F.O.V.
         WIDTH / HEIGHT,  # Aspect
-        10,  # Near clip
-        300  # Far clip
+        30,  # Near clip
+        34  # Far clip
     )
     CAMERA.up.set(0, 0, 1)
     dk_blue = Color.new(0x111550)
@@ -225,13 +235,17 @@ def setup():
 
     num_cubes = 100
 
+    amber = Color.new(0xb3a297)
     CAMERA.setFocalLength = 70
     CAMERA.position.x = 0
     CAMERA.position.y = 0
-    CAMERA.position.z = 24
+    CAMERA.position.z = 32
     CAMERA.lookAt(Vector3.new(0, 0, 0))
     LIGHT.intensity = 2.0
+    AMB_LIGHT.color = amber
+    AMB_LIGHT.intensity = 0.6
     SCENE.add(LIGHT)
+    SCENE.add(AMB_LIGHT)
 
     cubes = [Cube() for _ in range(num_cubes)]
     for cube in cubes:
