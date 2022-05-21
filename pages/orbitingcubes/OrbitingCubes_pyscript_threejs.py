@@ -17,9 +17,7 @@ import js
 
 from pyodide import create_proxy
 
-# import dat.gui as dat
 
-# from stats import Stats
 from three import (
     BoxGeometry,
     Color,
@@ -38,12 +36,8 @@ from three import (
     Vector3,
     WebGLRenderer,
 )
-# from OrbitControls import OrbitControls
 
 import utils
-
-# stats = Stats.new()
-# gui = dat.GUI.new()
 
 SCENE = None
 LIGHT = None
@@ -200,12 +194,9 @@ def init():
     global LIGHT
     global CAMERA
     global RENDERER
-    global CONTROLS
 
     py_canvas = js.document.getElementById('py_canvas')
     py_canvas.querySelector('.loading').remove()
-
-    # js.document.body.appendChild(stats.dom)
 
     Width = js.window.innerWidth
     Height = js.window.innerHeight
@@ -220,7 +211,6 @@ def init():
     )
     CAMERA.up.set(0, 0, 1)
     RENDERER = utils.rendererConfig(WebGLRenderer, Width, Height, GREY)
-    # CONTROLS = OrbitControls.new(CAMERA, RENDERER.domElement)
 
 
 def setup():
@@ -234,12 +224,6 @@ def setup():
     CAMERA.position.y = 0
     CAMERA.position.z = 24
     CAMERA.lookAt(Vector3.new(0, 0, 0))
-
-    # gui.remember(CAMERA)
-
-    # CONTROLS.target.set(0, 0, -2)
-    # CONTROLS.enableDamping = True
-    # CONTROLS.update()
 
     cubes = [Cube() for _ in range(NUM_CUBES)]
     for cube in cubes:
@@ -258,11 +242,9 @@ def update():
 
 
 def animate(*args):
-    # stats.begin()
     js.window.requestAnimationFrame(create_proxy(animate))
     update()
     RENDERER.render(SCENE, CAMERA)
-    # stats.end()
 
 
 init()
