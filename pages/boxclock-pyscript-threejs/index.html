@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pyscript/THREE.js BoxClock</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+      - paths:
+          - ../static/py/utils/utils.py
+    </py-env>
+    <py-config>
+      - autoclose_loader: false
+      - runtimes:
+        -
+          src: "https://cdn.jsdelivr.net/pyodide/dev/full/pyodide.js"
+          name: pyodide-0.20-nightly
+          lang: python
+    </py-config>
+</head>
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.141.0/build/three.module.js"
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.5.6/dist/es-module-shims.js"></script>
+    <py-script src="boxclock.py"></py-script>
+</body>
+</html>
