@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>pyscript/Babylon.js minimal demo</title>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/dev/full/pyodide.js"></script>
+  <style>
+    html,
+    body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #renderCanvas {
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+  </style>
+  <py-config>
+    - autoclose_loader: true
+    - runtimes:
+      -
+        src: https://cdn.jsdelivr.net/pyodide/v0.20.1a1/full/pyodide.js
+        name: pyodide-alpha
+        lang: python
+  </py-config>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babylonjs/5.10.0/babylon.max.js"></script>
+  <canvas id="renderCanvas"></canvas>
+  <py-script src="minimal_demo.py"></py-script>
+</body>
+</html>
