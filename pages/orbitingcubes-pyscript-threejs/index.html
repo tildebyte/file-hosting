@@ -4,55 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pyscript/THREE.js OrbitingCubes</title>
-    <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-    <style>
-        body {
-          margin: 0px;
-          background-color: #000000;
-          overflow: hidden;
-        }
-        .py {
-          margin: auto;
-          width: auto;
-          height: auto;
-        }
-
-        .loading {
-          margin: auto;
-          width: 50px;
-          height: 50px;
-          border: 3px solid rgb(255, 255, 255);
-          border-radius: 50%;
-          border-top-color: rgba(13, 9, 224, 0.651);
-          animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/pyodide/dev/full/pyodide.js"></script>
+    <py-env>
+      - paths:
+          - ../static/py/utils/utils.py
+    </py-env>
+    <py-config>
+      - autoclose_loader: false
+      - runtimes:
+        -
+          src: https://cdn.jsdelivr.net/pyodide/v0.20.1a1/full/pyodide.js
+          name: pyodide-alpha
+          lang: python
+    </py-config>
 </head>
 <body>
     <script type="importmap">
         {
             "imports": {
-                "three": "https://cdn.jsdelivr.net/npm/three@0.140.2/build/three.module.js"
+                "three": "https://cdn.jsdelivr.net/npm/three@0.141/build/three.module.js"
             }
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.5.4/dist/es-module-shims.js"></script>
-    <div>
-        <div id="py_canvas" class="py">
-            <div class="loading"></div>
-        </div>
-    </div>
-    <py-env>
-      - paths:
-          - ../static/py/utils/utils.py
-    </py-env>
     <py-script src="orbitingcubes.py"></py-script>
 </body>
 </html>
