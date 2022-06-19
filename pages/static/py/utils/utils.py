@@ -35,7 +35,12 @@ def randFloat(start, end):
 
 
 def rendererConfig(renderer, width, height, clearColor=0x000000):
-    renderer = renderer.new(antialias=True)
+    renderer = renderer.new(
+        powerPreference='high-performance',
+        antialias=True,
+        stencil=False,
+        depth=True
+    )
     renderer.setPixelRatio(js.window.devicePixelRatio)
     renderer.setSize(width, height)
     renderer.setClearColor(clearColor, 1.0)
