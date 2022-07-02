@@ -1,6 +1,6 @@
 import random
 
-from typing import Any
+from typing import Any, Literal
 
 import js
 
@@ -51,3 +51,11 @@ def renderer_config(renderer: Any, width: int,
     renderer.setSize(width, height)
     renderer.setClearColor(clear_color, 1.0)
     return renderer
+
+
+def screen_orientation() -> Literal['portrait', 'landscape']:
+    if (js.window.innerHeight > js.window.innerWidth):
+        orientation = "portrait"
+    else:
+        orientation = "landscape"
+    return orientation  # noqa: R504 - Single exit point > excess assignment before return

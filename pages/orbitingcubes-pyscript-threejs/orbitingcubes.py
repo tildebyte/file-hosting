@@ -31,7 +31,7 @@
 
 import math
 
-from typing import Any, Tuple
+from typing import Any, Tuple, Literal
 
 from pyodide import ffi
 from js import document, window
@@ -225,7 +225,7 @@ _CLICKED: int = 0
 _LIGHT: DirectionalLight = None
 _RENDERER: WebGLRenderer = None
 _SCENE: Scene = None
-
+_SCREEN_ORIENTATION: Literal['portrait', 'landscape'] = utils.screen_orientation()
 _CUBES: list[Cube] = []
 
 
@@ -234,6 +234,14 @@ def _handle_resize(event: Any) -> None:
     _CAMERA.updateProjectionMatrix()
     _RENDERER.setSize(window.innerWidth, window.innerHeight)
     _RENDERER.setPixelRatio(window.devicePixelRatio)
+
+
+def _handle_rotate(event) -> None:
+    global _SCREEN_ORIENTATION
+    current_orientation: Literal['portrait', 'landscape'] = utils.screen_orientation()
+    if current_orientation is not _SCREEN_ORIENTATION:
+        _SCREEN_ORIENTATION = current_orientation
+        _RENDERER.render(_SCENE, _CAMERA)
 
 
 def _handle_click(event: Any) -> None:
@@ -298,6 +306,7 @@ def _setup() -> None:
         _SCENE.add(cube.get_mesh_object())
     window.addEventListener('click', ffi.create_proxy(_handle_click))
     window.addEventListener('resize', ffi.create_proxy(_handle_resize))
+    window.addEventListener('rotate', ffi.create_proxy(_handle_rotate))
     document.body.appendChild(_RENDERER.domElement)
     _RENDERER.setAnimationLoop(ffi.create_proxy(_animate))
     _RENDERER.render(_SCENE, _CAMERA)

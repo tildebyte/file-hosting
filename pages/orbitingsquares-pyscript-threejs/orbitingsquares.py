@@ -32,7 +32,7 @@
 
 import math
 
-from typing import Any
+from typing import Any, Literal
 
 from pyodide import ffi
 from js import document, window
@@ -179,6 +179,7 @@ _WIDTH: int = window.innerWidth
 _CAMERA: PerspectiveCamera = None
 _RENDERER: WebGLRenderer = None
 _SCENE: Scene = None
+_SCREEN_ORIENTATION: Literal['portrait', 'landscape'] = utils.screen_orientation()
 
 _RECTS: list[Rect] = []
 
@@ -188,6 +189,14 @@ def _handle_resize(event: Any) -> None:
     _CAMERA.updateProjectionMatrix()
     _RENDERER.setSize(window.innerWidth, window.innerHeight)
     _RENDERER.setPixelRatio(window.devicePixelRatio)
+
+
+def _handle_rotate(event) -> None:
+    global _SCREEN_ORIENTATION
+    current_orientation: Literal['portrait', 'landscape'] = utils.screen_orientation()
+    if current_orientation is not _SCREEN_ORIENTATION:
+        _SCREEN_ORIENTATION = current_orientation
+        _RENDERER.render(_SCENE, _CAMERA)
 
 
 def _init() -> None:
@@ -219,6 +228,7 @@ def _setup() -> None:
     for rect in _RECTS:
         _SCENE.add(rect.get_mesh_object())
     window.addEventListener('resize', ffi.create_proxy(_handle_resize))
+    window.addEventListener('resize', ffi.create_proxy(_handle_rotate))
     document.body.appendChild(_RENDERER.domElement)
     _RENDERER.setAnimationLoop(ffi.create_proxy(_animate))
     _RENDERER.render(_SCENE, _CAMERA)
