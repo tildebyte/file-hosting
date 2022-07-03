@@ -90,4 +90,4 @@ def draw(*args):
 
 
 setup()
-p5js.requestAnimationFrame(create_proxy(draw))
+js.window.requestAnimationFrame(create_proxy(draw))
