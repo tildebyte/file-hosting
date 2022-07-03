@@ -2,14 +2,25 @@
 # 2. Of randomly-selected size
 # 3. Each having semi-tranparent fill and stroke
 # 4. Each colored according to an underlying algorithm
-# 5. Each rotating around its own center with a randomly-selected speed and
-#    direction
+# 5. Each fixed to one side of an (unseen) parent object which is rotating
+#    around its own center with a randomly-selected speed and direction
 # 6. Randomly distributed around the circumference of
 # 7. One of several concentric circles
-# 8. All lines rotating at a randomly-selected speed and direction around
-#    a common center point
+# 8. All lines rotating at a randomly-selected speed and direction around a
+#    common center point
 #
-# Implementation by Ben Alkov May 2022, base on my OrbitingCubes.py
+# Initial implementation by Ben Alkov 2022-05, based on my OrbitingCubes.py from 2016-12
+
+# Copyright 2022 Ben Alkov
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#   http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import math
 

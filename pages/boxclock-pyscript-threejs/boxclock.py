@@ -1,8 +1,20 @@
 # A wireframe box with colored edges which expands and contracts according
 # to time-of-day.
-# Adapted from my original Processing.py implementation, which was inspired
-# by *hms* from http:#www.gysin-vanetti.com/hms
-# Initial JS implementation on CodePen by Ben Alkov, November/December 2016
+# Inspired by *hms* from https://www.gysin-vanetti.com/hms
+#
+# Ported to pyscript/three.js by Ben Alkov 2022-06
+# Initial implementation by Ben Alkov 2016
+
+# Copyright 2022 Ben Alkov
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#   http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import datetime as dt
 
