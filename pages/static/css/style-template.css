@@ -1,0 +1,116 @@
+.markdown-preview {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box
+}
+
+.markdown-preview .pagebreak,
+.markdown-preview .newpage {
+    page-break-before: always
+}
+
+.markdown-preview pre.line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber
+}
+
+.markdown-preview pre.line-numbers>code {
+    position: relative
+}
+
+.markdown-preview pre.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 1em;
+    font-size: 100%;
+    left: 0;
+    width: 3em;
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.markdown-preview pre.line-numbers .line-numbers-rows>span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber
+}
+
+.markdown-preview pre.line-numbers .line-numbers-rows>span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: .8em;
+    text-align: right
+}
+
+.markdown-preview .mathjax-exps .MathJax_Display {
+    text-align: center !important
+}
+
+.markdown-preview:not([for="preview"]) .code-chunk .btn-group {
+    display: none
+}
+
+.markdown-preview:not([for="preview"]) .code-chunk .status {
+    display: none
+}
+
+.markdown-preview:not([for="preview"]) .code-chunk .output-div {
+    margin-bottom: 16px
+}
+
+.scrollbar-style::-webkit-scrollbar {
+    width: 8px
+}
+
+.scrollbar-style::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent
+}
+
+.scrollbar-style::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(150, 150, 150, 0.66);
+    border: 4px solid rgba(150, 150, 150, 0.66);
+    background-clip: content-box
+}
+
+html body[for="html-export"]:not([data-presentation-mode]) {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    overflow: auto
+}
+
+html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+    position: relative;
+    top: 0
+}
+
+@media screen and (min-width:914px) {
+    html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+        padding: 2em calc(50% - 457px + 2em)
+    }
+}
+
+@media screen and (max-width:914px) {
+    html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+        padding: 2em
+    }
+}
+
+@media screen and (max-width:450px) {
+    html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+        font-size: 14px !important;
+        padding: 1em
+    }
+}
