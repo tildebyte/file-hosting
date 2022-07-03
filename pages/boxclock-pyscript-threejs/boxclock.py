@@ -3,7 +3,8 @@
 # Inspired by *hms* from https://www.gysin-vanetti.com/hms
 #
 # Ported to pyscript/three.js by Ben Alkov 2022-06
-# Initial implementation by Ben Alkov 2016
+# Initial implementation by Ben Alkov 2015-02:
+# https://github.com/jdf/processing.py/tree/master/mode/examples/Demos/Graphics/BoxClock
 
 # Copyright 2022 Ben Alkov
 # Licensed under the Apache License, Version 2.0 (the "License");
