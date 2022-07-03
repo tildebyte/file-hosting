@@ -1,0 +1,22 @@
+# NOTICE
+
+The contents of this repo are copyrighted and licensed by Ben Alkov 2022-07-02
+
+The entire contents of this repo (https://github.com/tildebyte/file-hosting) are
+copyrighted, licensed software under the Apache License 2.0, the text of which
+is contained in the LICENSE file, AS FOLLOWS:
+
+- Files with a license comment (as described in the Appendix to the LICENSE
+  ("How to apply the Apache License to your work")) are fully covered.
+- Files WITHOUT a license comment are uncovered, and might possibly be covered
+  under another license, if they are adaptations or excerpts of work by others.
+  In some cases, I have provided an attribution for the origins of files or
+  snippets, but as I placed them here for personal use only, I have not been
+  especially diligent in this regard. TL;DR, you're on your own.
+
+Note that the PRODUCT/RENDERING/OUTPUT of many of the complete scripts in this
+repo is fully covered by U.S copyright law on its own as a visual work. For
+instance, if you use a video of one of the "sketches" in the "pages" directory
+as a background element in a Youtube video, you are ALREADY required by U.S.
+copyright law to 1) Ask my permission and 2) Provide attribution, AT A MINIMUM,
+regardless of the presence or absence of a software license.
