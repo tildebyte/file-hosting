@@ -31,6 +31,7 @@ import math
 
 # Not strictly necessary, but seeing naked e.g. `document`, `window`, etc. really bothers me
 import js
+
 from pyodide import create_proxy
 
 NUM_SQUARES = 100
@@ -168,9 +169,10 @@ def setup():
     global DK_GREEN
 
     p5js.frameRate(60)
-    p5js.createCanvas(WIDTH, HEIGHT, p5js.WEBGL)
+    renderer = p5js.createCanvas(p5js.windowWidth, p5js.windowHeight, p5js.WEBGL)
     # 2D renderer
-    # p5js.createCanvas(WIDTH, HEIGHT)
+    # renderer = p5js.createCanvas(p5js.windowWidth, p5js.windowHeight)
+    renderer.style('display', 'block')
     p5js.setAttributes('antialias', True)
     # p5js.strokeCap(p5js.SQUARE)  # Not available for WEBGL
     p5js.strokeWeight(2)
