@@ -32,10 +32,10 @@
 - [transcrypt][]
 
 [Babylon.js]: https://www.babylonjs.com
-[Bouncy Bubbles (pyscript/p5.js)]: ./bouncy-bubbles-pyscript-p5js/
+[Bouncy Bubbles (pyscript/p5.js)]: https://github.com/pyscript/pyscript-collective/tree/main/examples/bouncy-bubbles-p5js/
 [BoxClock (pyscript/three.js)]: ./boxclock-pyscript-threejs/
-[Minimal demo (pyscript/Babylon.js)]: ./minimal-demo-pyscript-babylonjs/
-[Minimal demo (pyscript/p5.js)]: ./minimal-demo-pyscript-p5js/
+[Minimal demo (pyscript/Babylon.js)]: https://github.com/pyscript/pyscript-collective/tree/main/examples/babylonjs-minimal-demo.html
+[Minimal demo (pyscript/p5.js)]: https://github.com/pyscript/pyscript-collective/tree/main/examples/p5js-minimal-demo.html
 [OrbitingCubes (pyscript/three.js)]: ./orbitingcubes-pyscript-threejs/
 [OrbitingSquares (pyscript/p5.js)]: ./orbitingsquares-pyscript-p5js/
 [OrbitingSquares (pyscript/three.js)]: ./orbitingsquares-pyscript-threejs/
