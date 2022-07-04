@@ -10,7 +10,19 @@
 #    a common center point
 #
 # Updated implemention, using pyscript and three.js by Ben Alkov May 2022
-# Initial implementation by Ben Alkov 20-27 November 2016.
+# Initial implementation by Ben Alkov 2016-11-20 - 27 for Codevember:
+# https://codepen.io/tildebyte/pen/LbqZMR
+
+# Copyright 2022 Ben Alkov
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#   http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import math
 
@@ -46,8 +58,8 @@ _RECTS = []
 
 class Rect():
     # three.js length units are in meters
-    RECT_MIN_SIZE = 1.25
-    RECT_MAX_SIZE = 2.0
+    RECT_MIN_SIZE = 0.75
+    RECT_MAX_SIZE = 1.5
 
     def __init__(self):
         self._size = utils.rand_float(self.RECT_MIN_SIZE, self.RECT_MAX_SIZE)
@@ -57,18 +69,18 @@ class Rect():
         # [-0.19, 0.19] within 0.03 degree of 0.
         self._orbit_angular_speed = utils.avoid_zero(0.19, 0.03)
         # [-1.5, 1.5] within 0.3 degree of 0.
-        self._object_angular_speed = utils.avoid_zero(1.5, 0.3)
+        self._object_angular_speed = utils.avoid_zero(1.25, 0.3)
         self._plane_geometry = PlaneGeometry.new(self._size, self._size)
         self._outline_geometry = EdgesGeometry.new(self._plane_geometry)
         self._plane_material = MeshBasicMaterial.new(
             transparent=True,
             side=DoubleSide,
-            opacity=utils.map_linear(self._size, 1.5, 0.75, 0.588, 0.784)
+            opacity=0.35
         )
         self._outline_material = LineBasicMaterial.new(
             transparent=True,
             side=DoubleSide,
-            opacity=utils.map_linear(self._size, 1.5, 0.75, 0.588, 0.784),
+            opacity=0.65,
             linewidth=2
         )
         self._plane_mesh = Mesh.new(self._plane_geometry, self._plane_material)
@@ -99,10 +111,8 @@ class Rect():
         self._plane_mesh.rotation.z = self._rotation.z
 
     def recolor(self):
-        blue = Color.new(0x1515eb)
-        dk_blue = Color.new(0x0a0a73)
-        green = Color.new(0x95c251)
-        dk_green = Color.new(0x394a1f)
+        blue = Color.new(0x2525C4)
+        green = Color.new(0x7DB528)
         angle = abs(self._angle)
         half_pi = math.pi / 2
         # Left half
@@ -110,21 +120,15 @@ class Rect():
             shade = utils.map_linear(angle, math.pi, half_pi, 0, 0.5)
             color = green.clone()
             other_color = blue.clone()
-            stroke_color = dk_green.clone()
-            other_stroke_color = dk_blue.clone()
         # Right half.
         else:
             shade = utils.map_linear(angle, 0, half_pi, 0, 0.5)
             color = blue.clone()
             other_color = green.clone()
-            stroke_color = dk_blue.clone()
-            other_stroke_color = dk_green.clone()
         self._plane_material.color = color.clone()
         self._plane_material.color.lerp(other_color,
                                         shade + utils.rand_float(-0.02, 0.02))
-        self._outline_material.color = stroke_color.clone()
-        self._outline_material.color.lerp(other_stroke_color,
-                                          shade + utils.rand_float(-0.02, 0.02))
+        self._outline_material.color = self._plane_material.color
 
     def _choose_orbit():
         # Randomly choose an orbit, based on a set of weights.
