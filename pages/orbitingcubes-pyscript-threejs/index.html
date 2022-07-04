@@ -6,29 +6,23 @@
     <title>pyscript/THREE.js OrbitingCubes</title>
     <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/dev/full/pyodide.js"></script>
     <py-env>
       - paths:
           - ../static/py/utils/utils.py
     </py-env>
     <py-config>
-      - autoclose_loader: false
-      - runtimes:
-        -
-          src: https://cdn.jsdelivr.net/pyodide/v0.20.1a1/full/pyodide.js
-          name: pyodide-alpha
-          lang: python
+      - autoclose_loader: true
     </py-config>
 </head>
 <body>
     <script type="importmap">
         {
             "imports": {
-                "three": "https://cdn.jsdelivr.net/npm/three@0.141/build/three.module.js"
+                "three": "https://cdn.jsdelivr.net/npm/three@0.141.0/build/three.module.js"
             }
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.5.4/dist/es-module-shims.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.5.6/dist/es-module-shims.js"></script>
     <py-script src="orbitingcubes.py"></py-script>
 </body>
 </html>
