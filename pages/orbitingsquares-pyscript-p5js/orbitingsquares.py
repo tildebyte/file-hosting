@@ -10,7 +10,8 @@
 #    a common center point
 #
 # Port to pyscript/p5.js by Ben Alkov 2022-07
-# Initial implementation by Ben Alkov 2016-11-20 - 27
+# Initial Processing.py implementation 2014-08-07 - 12:
+# https://github.com/tildebyte/processing.py-demos/blob/master/OrbitingSquares_HYPE/OrbitingSquares_HYPE.pyde
 
 # Copyright 2022 Ben Alkov
 # Licensed under the Apache License, Version 2.0 (the "License");

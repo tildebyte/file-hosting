@@ -10,8 +10,10 @@
 #    a common center point
 #
 # Updated implemention, using pyscript and three.js by Ben Alkov May 2022
-# Initial implementation by Ben Alkov 2016-11-20 - 27 for Codevember:
+# Port to three.js by Ben Alkov 2016-11-20 - 27 for Codevember:
 # https://codepen.io/tildebyte/pen/LbqZMR
+# Initial Processing.py implementation 2014-08-07 - 12:
+# https://github.com/tildebyte/processing.py-demos/blob/master/OrbitingSquares_HYPE/OrbitingSquares_HYPE.pyde
 
 # Copyright 2022 Ben Alkov
 # Licensed under the Apache License, Version 2.0 (the "License");
