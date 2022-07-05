@@ -10,7 +10,8 @@
 #    a common center point
 #
 # Ported to pyscript/three.js by Ben Alkov 2022-05
-# Initial implementation by Ben Alkov 2016-12
+# Initial implementation by Ben Alkov 2016-12 for #3December:
+# https://codepen.io/tildebyte/pen/VmgBXj
 
 # Copyright 2022 Ben Alkov
 # Licensed under the Apache License, Version 2.0 (the "License");
