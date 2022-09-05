@@ -263,7 +263,7 @@ a.pswp__share--download:hover {
 .pswp__caption {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 10px;
   width: 100%;
   min-height: 44px; }
   .pswp__caption small {
