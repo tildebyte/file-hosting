@@ -48,16 +48,29 @@
 
   <!-- GALLERY DESCRIPTIONS -->
 
-  {{ gallery_macros.section(0, 40,
-                              gallery_config['title'],
-                              "Generated as a collaboration between tildebyte and lstein's stable-diffusion.
-                              <br />
-                              Click on the images to see them full-sized, as well as the prompt used for generation.",
+  {{ gallery_macros.section(0, 6,
+                              "A kitten in a tuxedo, on his way to a funeral, as photographed by Edward Weston",
+                              "",
                               images)}}
 
-  {{ gallery_macros.section(40, images|length,
+  {{ gallery_macros.section(6, 40,
+                              "Miscellaneous images",
+                              "",
+                              images)}}
+
+  {{ gallery_macros.section(40, 62,
                               "Major Arcana of the Tarot, by Zdzislaw Beksinski and Tomasz Alen Kopera",
                               "Prompts: a painting of the X tarot card, precisionism, fractalism, dystopian art, by Zdzislaw Beksinski 1975 and Tomasz Alen Kopera 1976",
+                              images) }}
+
+  {{ gallery_macros.section(62, 73,
+                              "Funeral kittens in tuxedos, by Zdzislaw Beksinski and Tomasz Alen Kopera",
+                              "",
+                              images) }}
+
+  {{ gallery_macros.section(73, 74,
+                              "More images",
+                              "",
                               images) }}
 
   <!-- END GALLERY DESCRIPTIONS -->
