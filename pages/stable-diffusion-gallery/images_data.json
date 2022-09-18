@@ -1,4 +1,20 @@
 {
+    "000221-3073920875.png": {
+        "src": "images\\photos\\000221-3073920875.png",
+        "mtime": 1663469422.9871693,
+        "date": "",
+        "size": [
+            512,
+            704
+        ],
+        "type": "image",
+        "description": "a portrait of a cat goddess wearing a mourning gown, she is traveling to a memorial service, somber serious expression, a black and white photo by Frieke Janssens, centered, stark, beautiful, coherent, bastet -s 75 -W 512 -H 704 -C 7.5 -A k_euler_a -S 3073920875",
+        "thumbnail": "images\\thumbnails\\000221-3073920875.jpg",
+        "thumbnail_size": [
+            116,
+            160
+        ]
+    },
     "000000-3185101922.png": {
         "src": "images\\photos\\000000-3185101922.png",
         "mtime": 1662334933.1853187,
