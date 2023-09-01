@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Babylon.js minimal example</title>
+  <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+  <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
+  <style>
+    html,
+    body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #renderCanvas {
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+  </style>
+  <py-config>
+    [splashscreen]
+    enabled = true
+    autoclose = true
+
+    [[interpreters]]
+    src = "https://cdn.jsdelivr.net/npm/pyodide@0.23.4/pyodide.js"
+    name = "pyodide"
+    lang = "python"
+  </py-config>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babylonjs/5.10.0/babylon.max.js"></script>
+  <canvas id="renderCanvas"></canvas>
+  <script type="pyscript">
+# Adapted from https://www.npmjs.com/package/babylonjs#user-content-usage, the most minimal
+# example I could find anywhere
+# Ported to pyscript by Ben Alkov, 2022-06
+
+from typing import Any
+
+from pyodide.ffi import create_proxy
+from js import document, Element, Window, window
+
+babylonjs: Window = window.BABYLON
+
+
+def _handle_render() -> None:
+    scene.render()
+
+
+def _handle_resize(*args: dict[str, Any]) -> None:
+    engine.resize()
+
+
+canvas: Element = document.getElementById("renderCanvas")
+engine: babylonjs.Engine = babylonjs.Engine.new(canvas, True, preserveDrawingBuffer=True, stencil=True)
+
+
+def create_scene(engine) -> babylonjs.Scene:
+    scene: babylonjs.Scene = babylonjs.Scene.new(engine)
+    camera: babylonjs.FreeCamera = babylonjs.FreeCamera.new('camera1', babylonjs.Vector3.new(0, 5, -10), scene)
+    camera.setTarget(babylonjs.Vector3.Zero())
+    camera.attachControl(canvas, False)
+    light: babylonjs.HemisphericLight = babylonjs.HemisphericLight.new('light1', babylonjs.Vector3.new(0, 1, 0), scene)
+    sphere: babylonjs.Mesh = babylonjs.Mesh.CreateSphere('sphere1', 16, 2, scene, False, babylonjs.Mesh.FRONTSIDE)
+    sphere.position.y = 1
+    ground: babylonjs.Mesh = babylonjs.Mesh.CreateGround('ground1', 6, 6, 2, scene, False)
+    return scene
+
+
+scene: babylonjs.Scene = create_scene(engine)
+engine.runRenderLoop(create_proxy(_handle_render))
+window.addEventListener("resize", create_proxy(_handle_resize))
+  </script>
+</body>
+</html>
