@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>pyscript/p5.js OrbitingSquares</title>
-  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css"/>
-  <link rel="stylesheet" href="styles.css"/>
-  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-  <py-config>
-    - autoclose_loader: true
-  </py-config>
+  <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+  <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
 </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+    <div id="app-placeholder"></div>
+    <script
+        src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"
+        integrity="sha256-0HWtRJd4ZK0RlIjI+RY6L5X2va/34gBXt5XhVpP9kNA="
+        crossorigin="anonymous">
+    </script>
     <script>
       function setup() {}
     </script>
-    <py-script src="orbitingsquares.py"></py-script>
+    <py-config src="./pyscript.toml"></py-config>
+    <script type="pyscript" src="./orbitingsquares.py"></script>
   </body>
 </html>
