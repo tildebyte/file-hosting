@@ -10,12 +10,13 @@
     MathJax.Hub.Config({"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"],"messageStyle":"none","tex2jax":{"processEnvironments":false,"processEscapes":true,"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"TeX":{"extensions":["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]},"HTML-CSS":{"availableFonts":["TeX"]}});
   </script>
   <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js">
+  </script>
   <style>
     /**
- * prism.js Github theme based on GitHub's theme.
- * @author Sam Clarke
- */
+    * prism.js Github theme based on GitHub's theme.
+    * @author Sam Clarke
+    */
     code[class*="language-"],
     pre[class*="language-"] {
       color: #333;
@@ -253,51 +254,72 @@
       top: auto;
       bottom: .4em;
     }
-  </style>
+</style>
 </head>
-
 <body for="html-export">
   <div class="mume markdown-preview  ">
     <h1 class="mume-header" id="pages">Pages</h1>
-
-    <h2 class="mume-header" id="sketches-and-demos-for-the-web-written-in-python">Sketches
-      and demos for the web, written in Python</h2>
-
+    <p>Sources available at
+      <a href="https://github.com/tildebyte/file-hosting">tildebyte/file-hosting</a>
+    </p>
+    <h2 class="mume-header" id="things-for-the-web-written-in-python">
+        Things for the web, written in Python
+    </h2>
+    <h3 class="mume-header" id="sketches-and-demos">
+        Sketches and demos
+    </h3>
     <ul>
-      <li><a href="./boxclock-pyscript-threejs/">BoxClock (pyscript/three.js)</a></li>
-      <li><a href="./orbitingcubes-pyscript-threejs/">OrbitingCubes (pyscript/three.js)</a>
+      <li>
+        <pre data-role="codeBlock" data-info="python" class="language-python">
+<span class="token comment"># A wireframe box with colored edges which expands and contracts according to</span>
+<span class="token comment"># time-of-day</span>
+<span class="token comment"># Inspired by Gysin &amp; Vanetti&apos;s [*hms*](https://www.gysin-vanetti.com/hms)</span>
+        </pre>
+        <ul>
+          <li><a href="./boxclock-pyscript-threejs/">BoxClock (pyscript &amp; three.js)</a></li>
+        </ul>
       </li>
-      <li><a href="./orbitingsquares-pyscript-threejs/">OrbitingSquares
-          (pyscript/three.js)</a></li>
-      <li><a href="./orbitingwhiskers-pyscript-threejs/">OrbitingWhiskers
-          (pyscript/three.js)</a></li>
-    </ul>
-    <h2 class="mume-header" id="examples-minimal-demos-ports-of-others-work">Examples
-      (minimal demos, ports of other&#x2019;s work)</h2>
-
-    <ul>
-      <li><a
-          href="https://github.com/pyscript/pyscript-collective/tree/main/examples/bouncy-bubbles-p5js/">Bouncy
-          Bubbles (pyscript/p5.js)</a></li>
-      <li><a
-          href="https://github.com/pyscript/pyscript-collective/tree/main/examples/babylonjs-minimal-demo.html">Minimal
-          demo (pyscript/Babylon.js)</a></li>
-      <li><a
-          href="https://github.com/pyscript/pyscript-collective/tree/main/examples/p5js-minimal-demo.html">Minimal
-          demo (pyscript/p5.js)</a></li>
-    </ul>
-    <h2 class="mume-header"
-      id="abandonedbuggyexperimentalincomplateoldwip-sketches-and-demos">
-      Abandoned/buggy/experimental/incomplate/old/WIP sketches and demos</h2>
-
-    <ul>
-      <li><a href="./orbitingsquares-pyscript-p5js/">OrbitingSquares (pyscript/p5.js)</a>
+      <li>
+        <p>The rest of these are different visualizations of a recipe I used for a<br>
+          creative coding class (initially implemented using
+          <a href="https://py.processing.org">processing.py</a>)
+        </p>
+        <pre data-role="codeBlock" data-info="python" class="language-python">
+<span class="token comment"># 1. One hundred squares</span>
+<span class="token comment"># 2. Of randomly-selected size</span>
+<span class="token comment"># 3. Each having semi-tranparent fill and stroke</span>
+<span class="token comment"># 4. Each colored according to an underlying algorithm</span>
+<span class="token comment"># 5. Each rotating around its own center with a randomly-selected speed and</span>
+<span class="token comment">#    direction</span>
+<span class="token comment"># 6. Randomly distributed around the circumference of</span>
+<span class="token comment"># 7. One of several concentric circles</span>
+<span class="token comment"># 8. All squares rotating at a randomly-selected speed and direction around a</span>
+<span class="token comment">#    common center point</span>
+        </pre>
+        <ul>
+          <li><a href="./orbitingsquares-pyscript-p5js/">OrbitingSquares (pyscript &amp; p5.js)</a></li>
+          <li><a href="./orbitingsquares-pyscript-threejs/">OrbitingSquares (pyscript &amp; three.js)</a></li>
+          <li><a href="./orbitingcubes-pyscript-threejs/">OrbitingCubes (pyscript &amp; three.js)</a> (click or tap to change the visualization)</li>
+          <li><a href="./orbitingwhiskers-pyscript-threejs/">OrbitingWhiskers (pyscript &amp; three.js)</a> (click or tap to change the visualization)</li>
+        </ul>
       </li>
-      <li><a href="./orbitingsquares-transcrypt-pyp5js/">OrbitingSquares
-          (transcrypt/pyp5js)</a></li>
     </ul>
-    <h2 class="mume-header" id="tech-used">Tech used</h2>
-
+    <h3 class="mume-header" id="examples-minimal-demos-ports-of-others-work">
+      Examples (minimal demos, ports of other&apos;s work)
+    </h3>
+    <ul>
+      <li><a href="./bouncy-bubbles-pyscript-p5js/">Bouncy Bubbles (pyscript &amp; p5.js)</a></li>
+      <li><a href="./minimal-demo-pyscript-babylonjs.html">Minimal demo (pyscript &amp; Babylon.js)</a></li>
+      <li><a href="./minimal-demo-pyscript-p5js.html">REALLY minimal demo (pyscript &amp; p5.js)</a></li>
+    </ul>
+    <h3 class="mume-header"
+      id="abandonedbuggyexperimentalincompleteoldwip-sketches-and-demos">
+      Abandoned/buggy/experimental/incomplete/old/WIP sketches and demos
+    </h3>
+    <ul>
+      <li><a href="./orbitingsquares-transcrypt-pyp5js/">OrbitingSquares (transcrypt &amp; pyp5js)</a></li>
+    </ul>
+    <h4 class="mume-header" id="tech-used">Tech used</h4>
     <ul>
       <li><a href="https://www.babylonjs.com">Babylon.js</a></li>
       <li><a href="https://p5js.org">p5.js</a></li>
@@ -306,7 +328,6 @@
       <li><a href="https://threejs.org">three.js</a></li>
       <li><a href="https://transcrypt.org">transcrypt</a></li>
     </ul>
-
   </div>
 </body>
 </html>
