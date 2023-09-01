@@ -5,6 +5,10 @@
 # Ported to pyscript/three.js by Ben Alkov 2022-06
 # Initial Processing.py implementation by Ben Alkov 2015-02:
 # https://github.com/jdf/processing.py/tree/master/mode/examples/Demos/Graphics/BoxClock
+#
+# 2022-08 Update for breaking changes in pyscript and three, finally get three
+#     working properly as a module, fix jsdelivr URLs, pin versions for all the
+#     things, Python types (woohoo) thanks to pyodide basing on 3.11+
 
 # Copyright 2022 Ben Alkov
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +23,12 @@
 
 import datetime as dt
 
-# Not strictly necessary, but seeing naked e.g. `document`, `window`, etc. really bothers me
-import js
-from pyodide import create_proxy
-from three import (
+from typing import Any
+
+from pyodide import ffi
+
+from js import document, Float32Array, window
+from js.three import (
     BoxGeometry,
     BufferAttribute,
     BufferGeometry,
@@ -38,23 +44,57 @@ from three import (
 
 import utils
 
-_WIDTH = js.window.innerWidth
-_HEIGHT = js.window.innerHeight
+BoxGeometry: ffi.JsProxy
+BufferAttribute: ffi.JsProxy
+BufferGeometry: ffi.JsProxy
+Color: ffi.JsProxy
+LineBasicMaterial: ffi.JsProxy
+LineSegments: ffi.JsProxy
+Mesh: ffi.JsProxy
+MeshLambertMaterial: ffi.JsProxy
+PerspectiveCamera: ffi.JsProxy
+Scene: ffi.JsProxy
+WebGLRenderer: ffi.JsProxy
+Float32Array: ffi.JsProxy
+js: ffi.JsProxy
 
-_RED = Color.new(0xad002b)
-_GREEN = Color.new(0x4dba00)
-_BLUE = Color.new(0x061982)
-_BACKGROUND = Color.new(0x191919)
 
-_BOX = None
-_CAMERA = None
-_RENDERER = None
-_SCENE = None
+class Edges():
+    def __init__(self, record: dict[str, ffi.JsProxy]) -> None:
+        geometry: BufferGeometry = BufferGeometry.new()
+        verts: Float32Array = record['verts']
+        geometry.setAttribute('position', BufferAttribute.new(verts, 3))
+        material: LineBasicMaterial = LineBasicMaterial.new(color=record['color'])
+        self._lines_mesh: LineSegments = LineSegments.new(geometry, material)
 
-_DATA = {
+    def get_mesh_object(self) -> LineSegments:
+        return self._lines_mesh
+
+
+def _handle_resize(event: Any) -> None:
+    _CAMERA.aspect = window.innerWidth / window.innerHeight
+    _CAMERA.updateProjectionMatrix()
+    _RENDERER.setSize(window.innerWidth, window.innerHeight)
+    _RENDERER.setPixelRatio(window.devicePixelRatio)
+
+
+_WIDTH: int = window.innerWidth
+_HEIGHT: int = window.innerHeight
+
+_RED: Color = Color.new(0xad002b)
+_GREEN: Color = Color.new(0x4dba00)
+_BLUE: Color = Color.new(0x061982)
+_BACKGROUND: Color = Color.new(0x191919)
+
+_BOX: Mesh = None
+_CAMERA: PerspectiveCamera = None
+_RENDERER: WebGLRenderer = None
+_SCENE: Scene = None
+
+_DATA: dict[str, dict[str, ffi.JsProxy]] = {
     # Seconds - lines along `x`
     'seconds': {
-        'verts': js.Float32Array.new([
+        'verts': Float32Array.new([
                     -1.0, 1.0, 1.0,
                     1.0, 1.0, 1.0,
                     -1.0, -1.0, 1.0,
@@ -68,7 +108,7 @@ _DATA = {
     },
     # Minutes - lines along `y`
     'minutes': {
-        'verts': js.Float32Array.new([
+        'verts': Float32Array.new([
                     -1.0, 1.0, 1.0,
                     -1.0, -1.0, 1.0,
                     1.0, 1.0, 1.0,
@@ -82,7 +122,7 @@ _DATA = {
     },
     # Hours - lines along `z`
     'hours': {
-        'verts': js.Float32Array.new([
+        'verts': Float32Array.new([
                     -1.0, 1.0, -1.0,
                     -1.0, 1.0, 1.0,
                     1.0, 1.0, -1.0,
@@ -97,26 +137,7 @@ _DATA = {
 }
 
 
-class Edges():
-    def __init__(self, record):
-        geometry = BufferGeometry.new()
-        verts = record['verts']
-        geometry.setAttribute('position', BufferAttribute.new(verts, 3))
-        material = LineBasicMaterial.new(color=record['color'])
-        self._lines_mesh = LineSegments.new(geometry, material)
-
-    def get_mesh_object(self):
-        return self._lines_mesh
-
-
-def _handle_resize(event):
-    _CAMERA.aspect = js.window.innerWidth / js.window.innerHeight
-    _CAMERA.updateProjectionMatrix()
-    _RENDERER.setSize(js.window.innerWidth, js.window.innerHeight)
-    _RENDERER.setPixelRatio(js.window.devicePixelRatio)
-
-
-def _init():
+def _init() -> None:
     global _SCENE
     global _CAMERA
     global _RENDERER
@@ -131,7 +152,7 @@ def _init():
     _RENDERER = utils.renderer_config(WebGLRenderer, _WIDTH, _HEIGHT, _BACKGROUND)
 
 
-def _setup():
+def _setup() -> None:
     global _BOX
 
     # Draw a 2x2x2 cube with edges colored according to the
@@ -140,28 +161,28 @@ def _setup():
     # Minutes - lines along local `y`: Green
     # Hours - lines along local `z`: Blue
     # Scale down a teensy bit to prevent edge/face "fighting"
-    geometry = BoxGeometry.new(1.999, 1.999, 1.999)
-    material = MeshLambertMaterial.new(
+    geometry: BoxGeometry = BoxGeometry.new(1.999, 1.999, 1.999)
+    material: MeshLambertMaterial = MeshLambertMaterial.new(
         transparent=True,
         opacity=0)
     _CAMERA.position.z = 50
     _BOX = Mesh.new(geometry, material)
     for _, record in _DATA.items():
-        edge = Edges(record).get_mesh_object()
+        edge: Edges = Edges(record).get_mesh_object()
         _BOX.add(edge)
     _SCENE.add(_BOX)
-    js.window.addEventListener('resize', create_proxy(_handle_resize))
-    js.document.body.appendChild(_RENDERER.domElement)
-    _RENDERER.setAnimationLoop(create_proxy(_animate))
+    window.addEventListener('resize', ffi.create_proxy(_handle_resize))
+    document.body.appendChild(_RENDERER.domElement)
+    _RENDERER.setAnimationLoop(ffi.create_proxy(_animate))
     _RENDERER.render(_SCENE, _CAMERA)
 
 
-def _animate(*args):
+def _animate(*args: dict[str, Any]) -> None:
     tick = 0.0008
-    date = dt.datetime.now()
-    seconds = utils.map_linear(date.second, 0, 59, 1, 12)
-    minutes = utils.map_linear(date.minute, 0, 59, 1, 12)
-    hours = utils.map_linear(date.hour, 0, 23, 1, 12)
+    date: dt.datetime = dt.datetime.now()
+    seconds: int = int(utils.map_linear(date.second, 0, 59, 1, 12))
+    minutes: int = int(utils.map_linear(date.minute, 0, 59, 1, 12))
+    hours: int = int(utils.map_linear(date.hour, 0, 23, 1, 12))
 
     _BOX.rotation.x += tick
     _BOX.rotation.y += tick
@@ -170,9 +191,6 @@ def _animate(*args):
     _BOX.scale.y = minutes
     _BOX.scale.z = hours
     _RENDERER.render(_SCENE, _CAMERA)
-
-
-pyscript_loader.close()
 
 _init()
 _setup()

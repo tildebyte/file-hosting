@@ -1,0 +1,12 @@
+[splashscreen]
+enabled = true
+autoclose = true
+
+[[interpreters]]
+src = "https://cdn.jsdelivr.net/npm/pyodide@0.23.4/pyodide.js"
+name = "pyodide"
+lang = "python"
+
+[[fetch]]
+from = "../static/py/utils"
+files = ["utils.py"]

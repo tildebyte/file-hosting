@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pyscript/THREE.js OrbitingWhiskers</title>
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-    <py-env>
-      - paths:
-          - ../static/py/utils/utils.py
-    </py-env>
-    <py-config>
-      - autoclose_loader: true
-    </py-config>
+    <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
 </head>
 <body>
+    <div id="app-placeholder"></div>
     <script type="importmap">
         {
             "imports": {
-                "three": "https://cdn.jsdelivr.net/npm/three@0.141.0/build/three.module.js"
+                "three": "https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.module.js"
             }
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.5.6/dist/es-module-shims.js"></script>
-    <py-script src="orbitingwhiskers.py"></py-script>
+    <script type="module">
+        import * as three from 'three';
+        globalThis.three = three;
+    </script>
+    <py-config src="./pyscript.toml"></py-config>
+    <script type="pyscript" src="./orbitingwhiskers.py"></script>
 </body>
 </html>
