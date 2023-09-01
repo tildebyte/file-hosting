@@ -1,0 +1,13 @@
+{
+  "scripts": [
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/r82/three.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/lodash-compat/3.10.2/lodash.min.js",
+    "https://is.gd/Threejs_Detector",
+    "https://tildebyte.github.io/file-hosting/snippets/js/avoidZero.js",
+    "https://tildebyte.github.io/file-hosting/snippets/js/THREE.js/constants.js",
+    "https://tildebyte.github.io/file-hosting/snippets/js/THREE.js/platformRequestAnimationFrame.js",
+    "https://tildebyte.github.io/file-hosting/snippets/js/THREE.js/rendererConfig.js",
+    "https://tildebyte.github.io/file-hosting/snippets/js/THREE.js/onWindowResize.js"
+  ],
+  "styles": []
+}
